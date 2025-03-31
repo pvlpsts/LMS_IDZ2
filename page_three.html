@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		lr_2_3
+	</title>
+	<script src="JavaScript/data.js"></script>
+	<script src="JavaScript/main.js"></script>
+	<script src="JavaScript/table.js"></script>
+	<script src="JavaScript/filter.js"></script>
+	<script src="JavaScript/sort.js"></script>
+</head>
+
+<body>
+	<a href="page_one.html">
+		<h3>Самые высокооценённые фильмы</h3>
+	</a>
+	<p><a href="page_three.html">Список фильмов по рейтингу</a></p>
+
+	<hr>
+
+	<p>
+	<details>
+		<summary>График</summary>
+		<form>
+			<table>
+				<tr align="center">
+					<th>Значение по оси OX</th>
+					<th>Результат</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="OX" value="genre">Жанр<br><br>
+						<input type="radio" name="OX" value="country">Страна<br><br>
+						<input type="radio" name="OX" value="year">Год<br><br>
+					</td>
+					<td>
+						<input type="checkbox" name="res" value="maxgrade">Максимальные оценки<br><br>
+						<input type="checkbox" name="res" value="mingrade">Минимальные оценки<br><br>
+						<input type="checkbox" name="res" value="boxoffice">Суммарные сборы<br><br>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" value="Построить график"><br><br>
+		</form>
+		Здесь будет график
+	</details>
+	</p>
+
+	<p>
+	<details>
+		<summary>Фильтр</summary>
+		<form id="filter">
+			<p>
+				<label for="moviename">Название:</label>
+				<input type="text" id="moviename">
+			</p>
+			<p>
+				<label for="moviegenre">Жанр:</label>
+				<input type="text" id="moviegenre"><br><br>
+			</p>
+			<p>
+				<label for="prodcountry">Страна:</label>
+				<input type="text" id="prodcountry"><br><br>
+			</p>
+			<p>
+				<label for="ageratingFrom">Возрастной рейтинг: </label>
+				от <input type="number" min="0" max="18" id="ageratingFrom">
+				до <input type="number" min="0" max="18" id="ageratingTo">
+			</p>
+			<p>
+				<label for="yearFrom">Год: </label>
+				от <input type="number" id="yearFrom">
+				до <input type="number" id="yearTo">
+			</p>
+			<p>
+				<label for="gradeFrom">Оценки: </label>
+				от <input type="number" id="gradeFrom" min="0" max="10">
+				до <input type="number" id="gradeTo" min="0" max="10">
+			</p>
+			<p>
+				<label for="boxofficeFrom">Сборы(в долларах): </label>
+				от <input type="number" id="boxofficeFrom">
+				до <input type="number" id="boxofficeTo">
+			</p>
+			<input type="button" value="Найти"
+				onclick="filterTable(movies, 'list', document.getElementById('filter'), document.getElementById('sort'))">
+			<input type="button" value="Очистить фильтры"
+				onclick="clearFilter(movies, document.getElementById('filter'), document.getElementById('sort'), 'list')">
+		</form>
+	</details>
+	</p>
+
+	<p>
+	<details>
+		<summary>Сортировка</summary>
+		<form id="sort">
+			<h3 class="hdr">Сортировка</h3>
+			<p> Сортировать по</p>
+			<p>
+				<select id="fieldsFirst" onchange="changeNextSelect('fieldsSecond', this)">
+				</select>
+				по убыванию? <input type="checkbox" id="fieldsFirstDesc">
+			</p>
+			<p>
+				<select id="fieldsSecond" onchange="changeNextSelect('fieldsThird', this)">
+				</select>
+				по убыванию? <input type="checkbox" id="fieldsSecondDesc">
+			</p>
+			<p>
+				<select id="fieldsThird">
+				</select>
+				по убыванию? <input type="checkbox" id="fieldsThirdDesc">
+			</p>
+			<input type="button" value="Сортировать" onclick="sortTable('list', document.getElementById('sort'))">
+			<input type="button" value="Сбросить сортировку"
+				onclick="clearSort('list', movies, document.getElementById('filter'), document.getElementById('sort'))">
+		</form>
+	</details>
+	</p>
+
+	<table id="list" border="1" align="center" cellspacing="0" cellpadding="5">
+	</table>
+</body>
+
+</html>
